@@ -1,93 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotion Detector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            margin: 0;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-        }
-        h1 {
-            text-align: center;
-            color: #2d3748;
-        }
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        textarea {
-            width: 100%;
-            min-height: 120px;
-            padding: 12px;
-            border: 1px solid #cbd5e0;
-            border-radius: 8px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-        button {
-            margin-top: 15px;
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        .error {
-            color: #b91c1c;
-            font-weight: bold;
-            margin-top: 15px;
-        }
-        .results {
-            margin-top: 25px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 15px 20px;
-        }
-        .results p {
-            margin: 8px 0;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Emotion Detector</h1>
+# Emotion Detector
 
-        <form method="POST" action="/emotionDetector">
-            <label for="text">Enter text:</label>
-            <textarea id="text" name="text">{{ text or '' }}</textarea>
-            <button type="submit">Analyze Emotion</button>
-        </form>
+Emotion Detector is a simple Flask application that analyzes text and predicts the dominant emotion using IBM Watson NLP Emotion Analysis.
 
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
+## Overview
 
-        {% if results %}
-            <div class="results">
-                <p>Anger: {{ results.anger }}</p>
-                <p>Disgust: {{ results.disgust }}</p>
-                <p>Fear: {{ results.fear }}</p>
-                <p>Joy: {{ results.joy }}</p>
-                <p>Sadness: {{ results.sadness }}</p>
-                <p>Dominant Emotion: {{ results.dominant_emotion }}</p>
-            </div>
-        {% endif %}
-    </div>
-</body>
-</html>
+This project demonstrates how to send text to the Watson Natural Language Understanding (NLU) Emotion Analysis API and interpret the emotion scores for:
+
+- anger
+- disgust
+- fear
+- joy
+- sadness
+
+The app identifies the dominant emotion and presents the results in a clean web interface.
+
+## Technologies Used
+
+- Python 3
+- Flask
+- Requests
+- IBM Watson NLP / NLU
+- unittest
+- Pylint
+
+## Features
+
+- Text input form for emotion detection
+- Analysis of five emotion categories
+- Displays the dominant emotion
+- Graceful handling for blank or invalid input
+- Beginner-friendly code structure
+- Unit tests for validation
+
+## Project Structure
+
+```text
+Emotion-Detector/
+├── README.md
+├── requirements.txt
+├── server.py
+├── test_emotion_detection.py
+├── EmotionDetection/
+│   ├── __init__.py
+│   └── emotion_detection.py
+└── templates/
+    └── index.html
+```
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Prashik-Sasane/Emotion-Detector.git
+cd Emotion-Detector
+```
+
+Create a virtual environment and activate it:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Run the Application
+
+Start the Flask app:
+
+```bash
+python server.py
+```
+
+Then open this URL in your browser:
+
+```text
+http://127.0.0.1:5000
+```
+
+## Run Unit Tests
+
+```bash
+python -m unittest discover -v
+```
+
+## Run Pylint
+
+```bash
+pylint server.py
+pylint EmotionDetection/emotion_detection.py
+```
+
+## Watson NLP Setup
+
+Set the required environment variables before running the application:
+
+```bash
+export WATSON_API_KEY="your_api_key"
+export WATSON_INSTANCE_ID="your_instance_id"
+export WATSON_URL="https://api.us-south.natural-language-understanding.watson.cloud.ibm.com"
+export WATSON_VERSION="2022-04-07"
+```
+
+If the values are missing or the service is unavailable, the app returns a safe empty/error result instead of crashing.
+
+## Contributing
+
+If you want to contribute:
+
+```bash
+git checkout -b feature/your-change
+git status
+git add .
+git commit -m "Add your change"
+git push origin feature/your-change
+```
+
+Then open a pull request in GitHub.
+
+## Notes
+
+This project is intentionally kept simple and beginner-friendly so it can be used for learning, demos, and automated evaluation.
